@@ -8,12 +8,14 @@ package sister_teori.Modul9;
  *
  * @author ASUS
  */
-class PrintNameThread extends Thread {
+class PrintNameThread implements Runnable {
+    Thread thread;
     PrintNameThread(String name){
-        super(name);
-        start();
+        thread = new Thread(this, name);
+        thread.start();
+    }
         public void run() {
-            String name = getName();
+            String name = thread.getName();
             for (int i = 0; i < 100; i++){
                 System.out.print(name);
             }
@@ -21,10 +23,10 @@ class PrintNameThread extends Thread {
     }
     class TestThread {
         public static void main (String args[]){
-            PrintNameThread pnt1 = new PrintNameThread("A");
-            PrintNameThread pnt2 = new PrintNameThread("B");
-            PrintNameThread pnt3 = new PrintNameThread("C");
-            PrintNameThread pnt4 = new PrintNameThread("D");
+            new PrintNameThread("A");
+            new PrintNameThread("B");
+            new PrintNameThread("C");
+            new PrintNameThread("D");
         }
     }
 
